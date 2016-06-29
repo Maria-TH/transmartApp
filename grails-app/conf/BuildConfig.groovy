@@ -75,7 +75,7 @@ grails.project.dependency.resolution = {
             excludes 'groovy', 'nekohtml'
         }
         compile 'org.rosuda:Rserve:1.7.3'
-        compile 'com.google.guava:guava:14.0.1'
+        compile 'com.google.guava:guava:19.0'
         compile 'net.sf.ehcache:ehcache:2.9.0'
 
         compile 'org.apache.httpcomponents:httpclient:4.2.4'
