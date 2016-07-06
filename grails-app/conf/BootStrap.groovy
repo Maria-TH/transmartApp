@@ -54,14 +54,17 @@ class BootStrap {
 
     private void fixupConfig() {
         def c = grailsApplication.config
+        def workWithRemoteR = c.com.sanofi.transmart.workWithRemoteR
         def val
 
         /* rScriptDirectory */
         val = c.com.recomdata.transmart.data.export.rScriptDirectory
-        if (val) {
+
+        if (!workWithRemoteR && val) {
             logger.warn("com.recomdata.transmart.data.export.rScriptDirectory " +
                     "should not be explicitly set, value '$val' ignored")
         }
+
 
         def servletContext = grailsApplication.mainContext.servletContext
         def tsAppRScriptsDir
@@ -81,17 +84,21 @@ class BootStrap {
             throw new RuntimeException('Could not determine proper for ' +
                     'com.recomdata.transmart.data.export.rScriptDirectory')
         }
-        c.com.recomdata.transmart.data.export.rScriptDirectory = tsAppRScriptsDir.canonicalPath
+        if (!workWithRemoteR) {
+            c.com.recomdata.transmart.data.export.rScriptDirectory = tsAppRScriptsDir.canonicalPath
+        }
 
         logger.info("com.recomdata.transmart.data.export.rScriptDirectory = " +
                 "${c.com.recomdata.transmart.data.export.rScriptDirectory}")
 
         /* RModules.pluginScriptDirectory */
         val = c.RModules.pluginScriptDirectory
-        if (val) {
+
+        if (!workWithRemoteR && val) {
             logger.warn("RModules.pluginScriptDirectory " +
                     "should not be explicitly set, value '$val' ignored")
         }
+
         File rdcModulesDir = GrailsPluginUtils.getPluginDirForName('rdc-rmodules')?.file
         if (!rdcModulesDir) {
             // it actually varies...
@@ -116,7 +123,9 @@ class BootStrap {
             throw new RuntimeException('Could not determine proper for ' +
                     'RModules.pluginScriptDirectory')
         }
-        c.RModules.pluginScriptDirectory = rScriptsDir.canonicalPath + '/'
+        if (!workWithRemoteR) {
+            c.RModules.pluginScriptDirectory = rScriptsDir.canonicalPath + '/'
+        }
 
         logger.info("RModules.pluginScriptDirectory = " +
                 "${c.RModules.pluginScriptDirectory}")
