@@ -201,3 +201,18 @@
         </ul>
     </div>
 </div>
+
+
+<div class='navbarBox'>
+    <div class="navcontainer1">
+        <h1 class="panelHeader">
+            SolR
+        </h1>
+        <ul class="navlist">
+            <li>
+                <span class="adminMenuButton"><g:link class="list" controller="fmFolder"
+                                                      action="reindexFiles">Reindex files</g:link></span>
+            </li>
+        </ul>
+    </div>
+</div>
