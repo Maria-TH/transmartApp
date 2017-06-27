@@ -97,7 +97,7 @@ Ext.onReady(function () {
         border: true,
         layout: 'border'
     });
-    
+
     var tb = new Ext.Toolbar({
         id: 'maintoolbar',
         title: 'maintoolbar',
@@ -1371,7 +1371,7 @@ function setupOntTree(id_in, title_in) {
             }
         }
     });
-    
+
     ontTree.on('beforecollapsenode', function (node, deep, anim) {
         Ext.Ajax.request({
             url: removeNodeDseURL + "?node=" + node.id,
@@ -1875,7 +1875,7 @@ function runQuery(subset, callback) {
     if (setvaluewin.hidden) {
         queryPanel.el.mask('Getting subset ' + subset + '...', 'x-mask-loading');
     }
-        
+
     Ext.Ajax.request({
         url: pageInfo.basePath + "/queryTool/runQueryFromDefinition",
         method: 'POST',
@@ -3383,7 +3383,7 @@ function saveComparison() {
 
 function saveComparisonComplete(result) {
     var mobj = jQuery.parseJSON(result.responseText);
-    
+
     //If the window is already open, close it.
     if (this.saveComparisonWindow) {
         saveComparisonWindow.close();
